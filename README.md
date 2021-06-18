@@ -1,5 +1,5 @@
 # Personal-Blog
-## Authors
+## Author
 Nicholas Ngetich
 *****
 ## Description
