@@ -3,8 +3,7 @@
 Nicholas Ngetich
 *****
 ## Description
-This a flask application where users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
-This web app allows a user to view different pitc categories, create new pitch in any category the user wants. The user can sign up for a new account and get a confirmation email. After signing in, the user can comment on different pitches, view their pitches on profile and update bio and profile picture.
+This is a personal blogging website for creating and sharing opinions and other users can read and comment on them. It also displays random inspiring quotes to users.The application consumes API endpoint to fetch and display the random quotes.
 *****
 ### Prerequisites
 * Python 3
@@ -15,11 +14,11 @@ This web app allows a user to view different pitc categories, create new pitch i
 ## Setup Instruction
 To access this project on your local files, you can clone it using these steps
 1. Open your terminal
-1. Use this command to clone $ git clone https://github.com/ngetichnicholas/Pitch.git
+1. Use this command to clone $ git clone https://github.com/ngetichnicholas/Personal-Blog.git
 1. This will clone the repositoty into your local folder
 *****
 ### Live Link
-Or you can access the web application directly via this [LIVE LINK](https://nick-pitches-app.herokuapp.com/).
+Or you can access the web application directly via this [LIVE LINK]().
 ******
 ## Dependencies
 * Flask Bootstrap
