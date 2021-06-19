@@ -3,11 +3,12 @@ from . import main
 from flask_login import login_required,current_user
 from ..models import User,Blog
 from ..import db, photos
+from ..requests import get_quote
 
 #Views
 @main.route('/', methods = ["GET", "POST"])
 def index():
-  '''
-  Function to render home page with its data
-  '''
-  return render_template('index.html')
+    quote = get_quote()
+
+
+    return render_template("index.html",quote = quote)

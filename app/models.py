@@ -18,6 +18,8 @@ class User(UserMixin,db.Model):
   bio = db.Column(db.String(255))
   profile_pic_path = db.Column(db.String())
   blogs = db.relationship('Blog', backref='user', lazy='dynamic')
+  comment = db.relationship('Comment', backref='user', lazy='dynamic')
+
 
   @property
   def set_password(self):
@@ -49,13 +51,47 @@ class Blog(db.Model):
   content = db.Column(db.Text(), nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   time = db.Column(db.DateTime, default = datetime.utcnow)
-  
+  comment = db.relationship('Comment', backref='blog', lazy='dynamic')
+
   def save_p(self):
     db.session.add(self)
     db.session.commit()
 
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
+
+  def get_blog(id):
+    blog = Blog.query.filter_by(id=id).first()
+    return blog
+
   def __repr__(self):
-    return f'Task {self.post}'
+    return f'Blog {self.title}'
+
+class Comment(db.Model):
+  __tablename__='comments'
+
+  id = db.Column(db.Integer,primary_key = True)
+  comment = db.Column(db.String)
+  posted = db.Column(db.DateTime,default=datetime.utcnow)
+  blog_id = db.Column(db.Integer,db.ForeignKey("blogs.id"))
+  user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+
+  def save(self):
+    db.session.add(self)
+    db.session.commit()
+
+  def delete(self):
+    db.session.remove(self)
+    db.session.commit()
+
+  def get_comment(id):
+    comment = Comment.query.all(id=id)
+    return comment
+
+
+  def __repr__(self):
+    return f'Comment {self.comment}'
 
 class Quote:
   """
