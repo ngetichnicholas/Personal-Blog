@@ -9,7 +9,7 @@ class UpdateProfile(FlaskForm):
   username = StringField('Enter Your Username', validators=[Required()])
   email = StringField('Email Address', validators=[Required(),Email()])
   bio = TextAreaField('Write a brief bio about you.',validators = [Required()])
-  profile_pic_path = FileField('profile picture', validators=[FileAllowed(['jpg','png'])])
+  profile_picture = FileField('profile picture', validators=[FileAllowed(['jpg','png'])])
   submit = SubmitField('Update')
 
   def validate_email(self,email):
