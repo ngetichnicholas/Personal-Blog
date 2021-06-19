@@ -56,3 +56,11 @@ class Blog(db.Model):
 
   def __repr__(self):
     return f'Task {self.post}'
+
+class Quote:
+  """
+  Blueprint class for quotes consumed from API
+  """
+  def __init__(self, author, quote):
+    self.author = author
+    self.quote = quote
