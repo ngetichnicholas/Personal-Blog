@@ -1,3 +1,24 @@
 @media (max-width: 1000px) {
 
 }
+body {
+  background-color: #d6e3f8;
+}
+nav {
+  background-color: #584b53 !important;
+  height: 8vh !important;
+  padding-top: 1vh !important;
+}
+nav a {
+  color: #e4bb97 !important;
+  
+}
+.banner {
+  /* background-image: url('../images//windows2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat; */
+  background-color: #fef5ef;
+  height: 800px;
+  text-align: center;
+  padding: 20% 10% 20% 10%;
+}
