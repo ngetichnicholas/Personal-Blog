@@ -42,7 +42,6 @@ def updateprofile(name):
         user.email = form.email.data
         user.bio = form.bio.data
         db.session.commit()
-        flash('Succesfully updated your profile')
         return redirect(url_for('main.profile',name=user.username,))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -65,7 +64,6 @@ def new_blog():
         for subscriber in subscribers:
             mail_message("New Blog Post","email/new_blog",subscriber.email,blog=blog)
         return redirect(url_for('main.index'))
-        flash('You Posted a new Blog')
     return render_template('newblog.html', form = form)
 
 @main.route('/blog/<id>')
@@ -86,7 +84,6 @@ def updateblog(blog_id):
         blog.title = form.title.data
         blog.content = form.content.data
         db.session.commit()
-        flash("You have updated your Blog!")
         return redirect(url_for('main.blog',id = blog.id)) 
     if request.method == 'GET':
         form.title.data = blog.title
@@ -120,9 +117,15 @@ def delete_post(blog_id):
     if blog.user != current_user:
         abort(403)
     blog.delete()
-    flash("You have deleted your Blog succesfully!")
     return redirect(url_for('main.index'))
 
+@main.route("/blog/<int:id>/<int:comment_id>/delete")
+def delete_comment(id, comment_id):
+    blog = Blog.query.filter_by(id = id).first()
+    comment = Comment.query.filter_by(id = comment_id).first()
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect(url_for('main.index'))
 
 @main.route('/user/<string:username>')
 def user_posts(username):

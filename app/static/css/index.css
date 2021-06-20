@@ -16,9 +16,12 @@ nav a {
   background-color: #fef5ef;
   height: 800px;
   text-align: center;
-  padding: 10%;
+  padding: 5% 10% 5% 10%;
 }
 .quote {
   font-size: 20px;
+}
+#subscribeForm {
+  margin-top: 5%;
 }
 

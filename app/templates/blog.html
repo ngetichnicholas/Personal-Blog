@@ -9,12 +9,6 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-8">
-                        {% for message in get_flashed_messages() %}
-                        <div class="alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        {{ message }}
-                        </div>
-                        {% endfor %}
                         <p>By <span style="color: blue">{{blog.user.username}}</span>  on {{blog.time.strftime('%d-%m-%Y')}}</p>
                         <h3>Title : {{blog.title}} <span style="float: right;font-size:18px;margin-right:20px">{{blog.comment.count()}} Comments</span></h3>
                         <p>{{blog.content}}</p>
@@ -30,6 +24,9 @@
                         <h4>All Comments</h4>
                         {% for comment in comments %}
                             <p class="mt-10"><span style="font-weight: bold">{{comment.user.username}} : </span> {{comment.comment}}</p>
+                            <a href="{{url_for('main.delete_comment', id = blog.id, comment_id = comment.id)}}" class="btn text-white btn-danger"> <i
+                              class="far fa-trash-alt"></i>
+                          </a>
                         {% endfor %}
                     </div>
                 </div>  
