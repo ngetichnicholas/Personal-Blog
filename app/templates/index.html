@@ -4,17 +4,78 @@
 <!-- Styles block -->
 {% block styles%}
 {{ super() }}
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="../static/css/index.css" />
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid">
-<div class="banner">
-  <h1>Welcome to Niche Blog Website</h1>
-  <span class="subheading"><i class="fas fa-quote-left"></i> <em class="quote">{{quote.quote}}</em> <i class="fas fa-quote-right"></i></span>
-  <h2>{{quote.author}}</h2>
+  <div class="banner">
+    <h1>Welcome to Niche Blog Website</h1>
+    <span class="subheading"><i class="fas fa-quote-left"></i> <em class="quote">{{quote.quote}}</em> <i
+        class="fas fa-quote-right"></i></span>
+    <h2>{{quote.author}}</h2>
+  </div>
+  <div class="row">
+    <div class="row ">
+      {% if current_user.is_authenticated %}
+      <div class="col-md-3 "><a class="btn btn-sm btn-info " id="ref" href="{{url_for('main.new_blog')}}">Post</a></div>
+      {% endif %}
+  
+  <div class="col-md-9 "><h1 >Blogs</h1></div>
 </div>
+    <div class="col-md-8 ">
+      {% for blog in blogs.items %}
+      <div class="container bg mb-2">
+        <hr>
+        <div class="">
+            <p>Posted on : {{blog.time.strftime('%d-%m-%Y')}}</p>
+            <h4><a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title | upper}}</a></h4>
+            <p>{{blog.content}}</p>
+            <p> <a class="btn btn-sm btn-info" href="{{url_for('main.blog',id = blog.id)}}"> Comment</a>
+              {{blog.comment.count()}} Comments</p>
+
+        </div>
+        <hr>
+      </div>
+
+      {% endfor %}
+
+      {% for page_num in blogs.iter_pages(left_edge = 1, right_edge = 1, left_current=1, right_current = 2) %}
+      {% if page_num %}
+      {% if blogs.page == page_num %}
+      <a href="{{url_for('main.index',page = page_num)}}" class="btn btn-sm btn-info mb-2">{{ page_num }}</a>
+      {% else%}
+      <a href="{{url_for('main.index',page = page_num)}}" class="btn btn-sm btn-outline-info mb-2">{{ page_num }}</a>
+      {% endif %}
+      {% else%}
+    
+      {% endif %}
+      {% endfor %}
+
+    </div>
+    <div class="col-md-4">
+      <div class="container-fluid">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+        </div>
+        {% endfor %}
+        <form class="form-inline ml-2" action="{{url_for('main.subscribe')}}" method="POST">
+          <div class="md-form form-group">
+            <label class="white-color">Email Address...</label>
+            <input type="email" class="form-control " name="subscriber" required>
+          </div>
+          <div class="md-form form-group">
+            <button class="btn btn-sm btn-outline-info" id="subs">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

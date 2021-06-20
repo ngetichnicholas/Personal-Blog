@@ -53,7 +53,7 @@ class Blog(db.Model):
   time = db.Column(db.DateTime, default = datetime.utcnow)
   comment = db.relationship('Comment', backref='blog', lazy='dynamic')
 
-  def save_p(self):
+  def save(self):
     db.session.add(self)
     db.session.commit()
 
