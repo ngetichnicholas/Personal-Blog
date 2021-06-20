@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% import 'macros.html' as macro %}
 
 <!-- Styles block -->
 {% block styles%}
@@ -36,44 +35,24 @@
       {% endfor %}
     </div>
   </div>
-  <div class="row">
-    <div class="row ">
-      {% if current_user.is_authenticated %}
-      <div class="col-md-3 "><a class="btn btn-sm btn-info " id="ref" href="{{url_for('main.new_blog')}}">Post</a></div>
-      {% endif %}
-  
-  <div class="col-md-9 "><h1 >Blogs</h1></div>
-</div>
-    <div class="col-md-8 ">
-      {% for blog in blogs.items %}
-      <div class="container bg mb-2">
-        <hr>
-        <div class="">
-            <p>Posted on : {{blog.time.strftime('%d-%m-%Y')}}</p>
-            <h4><a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title | upper}}</a></h4>
-            <p>{{blog.content}}</p>
-            <p> <a class="btn btn-sm btn-info" href="{{url_for('main.blog',id = blog.id)}}"> Comment</a>
-              {{blog.comment.count()}} Comments</p>
+  <div class="row" id="blogsContainer">
+    <h1>Recent Blogs</h1>
+    {% for blog in blogs %}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <hr>
+      <div class="">
+        <p>Posted on : {{blog.time.strftime('%d-%m-%Y')}} by <a href="user/{{blog.user.username}}">{{blog.user.username}}</a></p>
+        <h4><a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title | upper}}</a></h4>
+        <p>{{blog.content}}</p>
+        <p> <a class="btn btn-success" href="{{url_for('main.blog',id = blog.id)}}"> Comment</a>
+          {{blog.comment.count()}} Comments</p>
 
-        </div>
-        <hr>
       </div>
-
-      {% endfor %}
-
-      {% for page_num in blogs.iter_pages(left_edge = 1, right_edge = 1, left_current=1, right_current = 2) %}
-      {% if page_num %}
-      {% if blogs.page == page_num %}
-      <a href="{{url_for('main.index',page = page_num)}}" class="btn btn-sm btn-info mb-2">{{ page_num }}</a>
-      {% else%}
-      <a href="{{url_for('main.index',page = page_num)}}" class="btn btn-sm btn-outline-info mb-2">{{ page_num }}</a>
-      {% endif %}
-      {% else%}
-    
-      {% endif %}
-      {% endfor %}
-
+      <hr>
     </div>
+
+    {% endfor %}
   </div>
+
 </div>
 {% endblock %}

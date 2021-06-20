@@ -13,11 +13,12 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <a class="navbar-brand" href="">Recent</a>
+      <a class="navbar-brand" href="#blogsContainer">Recent</a>
       <a class="navbar-brand" href=""></a>
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           {% if current_user.is_authenticated %}
+          <a class="btn btn-outline-primary" id="post" href="{{url_for('main.new_blog')}}">Post</a>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" style='margin-right:30px' data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">

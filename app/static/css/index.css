@@ -14,7 +14,7 @@ nav a {
 }
 .banner {
   background-color: #fef5ef;
-  height: 800px;
+  height: 600px;
   text-align: center;
   padding: 5% 10% 5% 10%;
 }
@@ -23,5 +23,22 @@ nav a {
 }
 #subscribeForm {
   margin-top: 5%;
+}
+#post {
+  border: 1.5px solid #fef5ef !important;
+}
+h1 {
+  text-align: center;
+}
+#blogsContainer {
+  margin: 6vh;
+}
+.user-img {
+  width: 2cm !important;
+  height: 2cm !important;
+  border-radius: 50% !important;
+}
+#userComment {
+  margin-bottom: 2rem !important;
 }
 

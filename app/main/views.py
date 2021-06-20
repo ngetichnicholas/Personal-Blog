@@ -16,8 +16,7 @@ from ..email import mail_message
 @main.route('/')
 def index():
     quote = get_quote()
-    page = request.args.get('page',1, type = int )
-    blogs = Blog.query.order_by(Blog.time.desc()).paginate(page = page, per_page = 3)
+    blogs = Blog.query.order_by(Blog.time.desc())
     return render_template('index.html', blogs=blogs,quote = quote)
 
 @main.route('/profile/<name>',methods = ['POST','GET'])
@@ -125,11 +124,10 @@ def delete_comment(id, comment_id):
     comment = Comment.query.filter_by(id = comment_id).first()
     db.session.delete(comment)
     db.session.commit()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.blog',id = blog.id))
 
 @main.route('/user/<string:username>')
 def user_posts(username):
     user = User.query.filter_by(username=username).first()
-    page = request.args.get('page',1, type = int )
-    blogs = Blog.query.filter_by(user=user).order_by(Blog.posted.desc()).paginate(page = page, per_page = 4)
+    blogs = Blog.query.filter_by(user=user).order_by(Blog.time.desc())
     return render_template('userposts.html',blogs=blogs,user = user)
