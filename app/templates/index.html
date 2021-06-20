@@ -18,7 +18,7 @@
         class="fas fa-quote-right"></i></span>
     <h2>{{quote.author}}</h2>
     <form id="subscribeForm" class="form-inline ml-2" action="{{url_for('main.subscribe')}}" method="POST">
-      <h1>Subscribe Here</h1>
+      <h1 class="subscribe">Subscribe Here</h1>
       <div class="md-form form-group">
         <input type="email" class="form-control" placeholder="Email Address..." name="subscriber" required>
       </div>
@@ -38,21 +38,60 @@
   <div class="row" id="blogsContainer">
     <h1>Recent Blogs</h1>
     {% for blog in blogs %}
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-      <hr>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 all-blogs">
       <div class="">
-        <p>Posted on : {{blog.time.strftime('%d-%m-%Y')}} by <a href="user/{{blog.user.username}}">{{blog.user.username}}</a></p>
         <h4><a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title | upper}}</a></h4>
-        <p>{{blog.content}}</p>
-        <p> <a class="btn btn-success" href="{{url_for('main.blog',id = blog.id)}}"> Comment</a>
-          {{blog.comment.count()}} Comments</p>
+        <h5>{{blog.description}}</h5>
+        <p>Posted on :<small class="text-muted mr-2"> {{blog.time.strftime('%d-%m-%Y')}}</small> by <a
+          href="user/{{blog.user.username}}">{{blog.user.username}}</a></p>
+        <p> <a class="btn btn-success" href="{{url_for('main.blog',id = blog.id)}}">{{blog.comment.count()}} <i class="far fa-comments"  style='font-size:30px;'></i></a></p>
 
       </div>
-      <hr>
     </div>
 
     {% endfor %}
   </div>
 
+</div>
+<div class="container-fluid">
+  <footer class="text-center text-white" style="background-color: #584b53;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+        <!-- Twitter -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+        <!-- Google -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+        <!-- Instagram -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+        <!-- Linkedin -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+        <!-- Github -->
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+          data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2021 Copyright:
+      <a class="text-dark" href="https://github.com/ngetichnicholas/" target="_blank">blogs@nick.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
 </div>
 {% endblock %}

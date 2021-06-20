@@ -4,54 +4,98 @@
 {% block styles%}
 {{ super() }}
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="../static/css/index.css" />
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="text-center mb-2">{{user.blogs.count()}} Posts by {{ user.username }} </h1>
-        <div class="row">
-            <div class="col-md-2">
-                    
-            </div>
-            <div class="col-md-8">
-                {% for blog in blogs %}
-                    <div class="bg mb-2" >
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <img  src="{{url_for('static',filename=blog.user.profile_pic_path)}}" style="height:300px;border-radius: 1%"
-                                class="user-img" alt="woman avatar">
-                            </div>
-                            <div class="col-md-6">
-                                <p>By <span style="color: blue">{{blog.user.username}}</span>  on {{blog.time.strftime('%d-%m-%Y')}}</p>
-                                <h3>Tittle: <a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title}}</a></h3>
-                                <p>{{blog.content}}</p>
-                                <p>{{blog.comment.count()}} Comments</p>
-    
-                            </div>
-                            <div class="col-md-4">
-                                <form class="form-inline" action="{{url_for('main.comment',blog_id = blog.id)}}" method="POST">
-                                    <div class="md-form form-group">
-                                        <!-- <i class="fa fa-lock prefix"></i> -->
-                                        <label for="form92">Type your comment</label>
-                                        <input type="text" id="userComment"  class="form-control" name ="newcomment" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-success">Comment</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>  
-                        <hr> 
-                    </div>
-                {% endfor %}
+<div class="container">
+    <h1 class="text-center mb-2">{{user.blogs.count()}} Posts by {{ user.username }} </h1>
+    <div class="row">
+        <div class="col-md-2">
 
-            </div>
-            <div class="col-md-2"></div>
         </div>
+        <div class="col-md-8">
+            {% for blog in blogs %}
+            <div class="user-blogs">
+                <div class="row">
+                    <div class="col-md-2">
+                        {% if blog.user.profile_pic_path %}
+                        <img src="{{url_for('static',filename=blog.user.profile_pic_path)}}"
+                            style="height:300px;border-radius: 1%" class="user-img" alt="woman avatar">
+                        {%else%}
+                        <i class='fas fa-user-alt' style='font-size:80px;color: #584b53'></i> 
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <p>By <span style="color: blue">{{blog.user.username}}</span> on
+                            {{blog.time.strftime('%d-%m-%Y')}}</p>
+                        <h3>Tittle: <a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title}}</a></h3>
+                        <p>{{blog.content}}</p>
+                        <p>{{blog.comment.count()}} Comments</p>
+
+                    </div>
+                    <div class="col-md-4">
+                        <form class="form-inline" action="{{url_for('main.comment',blog_id = blog.id)}}" method="POST">
+                            <div class="md-form form-group">
+                                <!-- <i class="fa fa-lock prefix"></i> -->
+                                <label for="form92">Type your comment</label>
+                                <input type="text" id="userComment" class="form-control" name="newcomment" required>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="col-md-2"></div>
     </div>
+</div>
+<div class="container-fluid">
+    <footer class="text-center text-white" style="background-color: #584b53;">
+      <!-- Grid container -->
+      <div class="container pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+  
+          <!-- Twitter -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+  
+          <!-- Google -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+  
+          <!-- Instagram -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+  
+          <!-- Linkedin -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+          <!-- Github -->
+          <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+            data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+  
+      <!-- Copyright -->
+      <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-dark" href="https://github.com/ngetichnicholas/" target="_blank">blogs@nick.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </div>
 {% endblock %}

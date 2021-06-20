@@ -3,90 +3,92 @@
 <!-- Styles block -->
 {% block styles%}
 {{ super() }}
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="../../static/css/index.css" />
 {% endblock %}
 
 {% block content %}
-    <div class="container ">
-        <h1 class="text-center"> A Blog by {{blog.user.username}}</h1>
-        <div class="row">
-            
-            <div class="col-md-12 singleblog">
-                <hr>
-                <div class="row">
-                    <div class="col-md-8">
-                        <p>By <span style="color: blue">{{blog.user.username}}</span>  on {{blog.time.strftime('%d-%m-%Y')}}</p>
-                        <h3>Title : {{blog.title}} <span style="float: right;font-size:18px;margin-right:20px">{{blog.comment.count()}} Comments</span></h3>
-                        <p>{{blog.content}}</p>
-                        <div>
-                        <a class="btn btn-success btn-sm m-1" data-toggle="modal" data-target="#modalComment">Comment</a>
-                        {% if blog.user == current_user %}
-                            <a class="btn btn-info btn-sm m-1" href="{{url_for('main.updateblog',blog_id = blog.id)}}">Edit Blog</a>
-                            <button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#modalConfirmDelete" type="submit">Delete </button>
-                        {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <h4>All Comments</h4>
-                        {% for comment in comments %}
-                            <p class="mt-10"><span style="font-weight: bold">{{comment.user.username}} : </span> {{comment.comment}}</p>
-                            <a href="{{url_for('main.delete_comment', id = blog.id, comment_id = comment.id)}}" class="btn text-white btn-danger"> <i
-                              class="far fa-trash-alt"></i>
-                          </a>
-                        {% endfor %}
-                    </div>
-                </div>  
-                <hr>      
-            </div>
-            <div class="col-md-1"></div>
-        </div>
-    </div>
+<div class="container ">
+  <h1 class="text-center"> A Blog by {{blog.user.username}}</h1>
 
-    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-            <div class="modal-content text-center">
-              <div class="modal-header d-flex justify-content-center">
-                <p class="heading">Are you sure?</p>
-              </div>
-              <div class="modal-body">
-                <i class="fas fa-times fa-4x animated rotateIn"></i>
-              </div>
-              <div class="modal-footer flex-center">
-                <form action="{{url_for('main.delete_post',blog_id = blog.id)}}" method="POST">
-                    <input  type="submit" class="btn  btn-outline-danger btn-sm" value="Yes">
-                </form>
-                <a type="button" class="btn btn-sm btn-danger waves-effect" data-dismiss="modal">No</a>
-              </div>
-            </div>
-        </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2>{{blog.title | upper}}</h2>
+      <p>{{blog.description}}</p>
+      <p>{{blog.content}}</p>
+      <p>Posted on :<small class="text-muted mr-2"> {{blog.time.strftime('%d-%m-%Y')}}</small> by
+        {{blog.user.username}}</p>
+      <div>
+        <a class="btn btn-success btn-sm m-1" data-toggle="modal" data-target="#modalComment"><i class="fas fa-comment" style='font-size:30px;'></i><br>Add Comment</a>
+        {% if blog.user == current_user %}
+        <a class="btn btn-info btn-sm m-1" href="{{url_for('main.updateblog',blog_id = blog.id)}}"><i class="fas fa-edit" style='font-size:30px;'></i><br>Edit Blog</a>
+        <button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#modalConfirmDelete"
+          type="submit"><i class="fas fa-trash" style='font-size:30px;'></i><br>Delete Blog </button>
+        {% endif %}
+      </div>
+      <div class="comments">
+        <h3>Comments</h3>
+        {% for comment in comments %}
+        <p class="mt-10"><span style="font-weight: bold">{{comment.user.username}} : </span> {{comment.comment}}</p>
+        <a href="{{url_for('main.delete_comment', id = blog.id, comment_id = comment.id)}}"
+          class="btn text-white btn-danger"> <i class="far fa-trash-alt"></i><br>Delete
+        </a>
+        {% endfor %}
+      </div>
     </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
 
-    <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-info" role="document">
-      <div class="modal-content text-center">
-        <div class="modal-header d-flex justify-content-center">
-          <p class="heading">Leave A comment Here</p>
-        </div>
-        <div class="modal-body">
-            <form class="form" action="{{url_for('main.comment',blog_id = blog.id)}}" method="POST">
-                <div class="form-group green-border-focus">
-                    <label></label>
-                    <textarea class="form-control" placeholder="Type your comment..." rows="2" name ="newcomment" required></textarea>
-                </div>
-                <div class="modal-footer flex-center">
-                    <button class="btn btn-sm btn-outline-success">Comment</button>
-                    <a type="button" class="btn btn-outline-danger btn-sm " data-dismiss="modal">Exit</a>
-                </div>
-            </form>
-        </div>
-       
-    
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Are you sure?</p>
+      </div>
+      <div class="modal-body">
+        <i class="fas fa-times fa-4x animated rotateIn"></i>
+      </div>
+      <div class="modal-footer flex-center">
+        <form action="{{url_for('main.delete_post',blog_id = blog.id)}}" method="POST">
+          <input type="submit" class="btn  btn-outline-danger btn-sm" value="Yes">
+        </form>
+        <a type="button" class="btn btn-sm btn-danger waves-effect" data-dismiss="modal">No</a>
       </div>
     </div>
   </div>
-    
+</div>
+
+<div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-info" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Leave A comment Here</p>
+      </div>
+      <div class="modal-body">
+        <form class="form" action="{{url_for('main.comment',blog_id = blog.id)}}" method="POST">
+          <div class="form-group green-border-focus">
+            <label></label>
+            <textarea class="form-control" placeholder="Type your comment..." rows="2" name="newcomment"
+              required></textarea>
+          </div>
+          <div class="modal-footer flex-center">
+            <button class="btn btn-sm btn-outline-success">Comment</button>
+            <a type="button" class="btn btn-outline-danger btn-sm " data-dismiss="modal">Exit</a>
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
 {% endblock %}
