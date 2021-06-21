@@ -63,14 +63,14 @@ def new_blog():
         for subscriber in subscribers:
             mail_message("New Blog Post","email/new_blog",subscriber.email,blog=blog)
         return redirect(url_for('main.index'))
-    return render_template('newblog.html', form = form)
+    return render_template('post.html', form = form)
 
 @main.route('/blog/<id>')
 @login_required
 def blog(id):
     comments = Comment.query.filter_by(blog_id=id).all()
     blog = Blog.query.get(id)
-    return render_template('blog.html',blog=blog,comments=comments)
+    return render_template('blog_page.html',blog=blog,comments=comments)
     
 
 @main.route('/blog/<blog_id>/update', methods = ['GET','POST'])
@@ -82,13 +82,15 @@ def updateblog(blog_id):
     form = CreateBlog()
     if form.validate_on_submit():
         blog.title = form.title.data
+        blog.description = form.description.data
         blog.content = form.content.data
         db.session.commit()
         return redirect(url_for('main.blog',id = blog.id)) 
     if request.method == 'GET':
         form.title.data = blog.title
+        form.description.data = blog.description
         form.content.data = blog.content
-    return render_template('newblog.html', form = form)
+    return render_template('edit_blog.html', form = form)
 
 
 
@@ -132,4 +134,4 @@ def delete_comment(id, comment_id):
 def user_posts(username):
     user = User.query.filter_by(username=username).first()
     blogs = Blog.query.filter_by(user=user).order_by(Blog.time.desc())
-    return render_template('userposts.html',blogs=blogs,user = user)
+    return render_template('user.html',blogs=blogs,user = user)

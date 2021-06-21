@@ -46,6 +46,13 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+#deleteForm {
+  display: inline !important;
+}
+#comment {
+  width: 100% !important;
+  display: block;
+}
 
 #userTable td, #userTable th {
   border: 1px solid #ddd;
@@ -95,11 +102,16 @@ hr {
   background-color: #584b53 !important;
   height: 1.5px;
 }
-.user-blogs, .all-blogs {
+.all-blogs {
   padding: 2rem !important;
   border: 1.5px solid #584b53 !important;
   height: 25vh !important;
   overflow-y: auto !important;
+}
+.user-blogs {
+  padding: 2rem !important;
+  border: 1.5px solid #584b53 !important;
+  height: auto !important;
 }
 footer {
   color: #e4bb97;
