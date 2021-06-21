@@ -30,11 +30,11 @@
                         {% endif %}
                     </div>
                     <div class="col-md-6">
-                        <p>By <span style="color: blue">{{blog.user.username}}</span> on
-                            {{blog.time.strftime('%d-%m-%Y')}}</p>
-                        <h3>Tittle: <a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title}}</a></h3>
+                        <h3><a href="{{url_for('main.blog',id = blog.id)}}">{{blog.title}}</a></h3>
+                        <p>{{blog.description}}</p>
                         <p>{{blog.content}}</p>
-                        <p>{{blog.comment.count()}} Comments</p>
+                        <p>By <span style="color: blue">{{blog.user.username}}</span> on
+                          {{blog.time.strftime('%d-%m-%Y')}}</p>
 
                     </div>
                     <div class="col-md-4">

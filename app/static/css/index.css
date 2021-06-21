@@ -114,4 +114,9 @@ footer a {
   #blogsContainer {
     margin: 0 !important;
   }
+  .banner {
+    height: auto;
+    text-align: center;
+    padding: 5%;
+  }
 }
