@@ -5,6 +5,18 @@ Nicholas Ngetich
 ## Description
 This is a personal blogging website for creating and sharing opinions and other users can read and comment on them. It also displays random inspiring quotes to users.The application consumes API endpoint to fetch and display the random quotes.
 *****
+### Landing page
+![alt text]()
+*****
+### User Blogs
+![alt text]()
+*****
+### Delete Own Blog
+![alt text]()
+*****
+### Comment and Delete
+![alt text]()
+*****
 ### Prerequisites
 * Python 3
 * Text editor eg Visual Studio Code
