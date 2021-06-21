@@ -6,16 +6,16 @@ Nicholas Ngetich
 This is a personal blogging website for creating and sharing opinions and other users can read and comment on them. It also displays random inspiring quotes to users.The application consumes API endpoint to fetch and display the random quotes.
 *****
 ### Landing page
-![alt text]()
+![alt text](https://github.com/ngetichnicholas/Personal-Blog/blob/main/app/static/images/landing.png)
 *****
 ### User Blogs
-![alt text]()
+![alt text](https://github.com/ngetichnicholas/Personal-Blog/blob/main/app/static/images/user_blogs.png)
 *****
 ### Delete Own Blog
-![alt text]()
+![alt text](https://github.com/ngetichnicholas/Personal-Blog/blob/main/app/static/images/delete_own_blog.png)
 *****
 ### Comment and Delete
-![alt text]()
+![alt text](https://github.com/ngetichnicholas/Personal-Blog/blob/main/app/static/images/comment_and_delete_any.png)
 *****
 ### Prerequisites
 * Python 3
@@ -30,7 +30,7 @@ To access this project on your local files, you can clone it using these steps
 1. This will clone the repositoty into your local folder
 *****
 ### Live Link
-Or you can access the web application directly via this [LIVE LINK]().
+Or you can access the web application directly via this [LIVE LINK](https://niche-blogs.herokuapp.com/).
 ******
 ## Dependencies
 * Flask Bootstrap
