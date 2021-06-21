@@ -1,4 +1,4 @@
-from flask import render_template, redirect,url_for,abort,request,flash
+from flask import render_template, redirect,url_for,abort,request
 from . import main
 from app.requests import get_quote
 from flask_login import login_required,current_user
@@ -109,7 +109,6 @@ def subscribe():
     new_subscriber = Subscriber(email = email)
     new_subscriber.save_subscriber()
     mail_message("Subscribed to Niche Blogs","email/welcome_subscriber",new_subscriber.email,new_subscriber=new_subscriber)
-    flash('Sucessfuly subscribed')
     return redirect(url_for('main.index'))
 
 @main.route('/blog/<blog_id>/delete', methods = ['POST'])

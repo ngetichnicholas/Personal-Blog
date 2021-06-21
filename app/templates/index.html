@@ -26,14 +26,6 @@
         <button class="btn btn-sm btn-outline-info" id="subs">Subscribe</button>
       </div>
     </form>
-    <div>
-      {% for message in get_flashed_messages() %}
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-      </div>
-      {% endfor %}
-    </div>
   </div>
   <div class="row" id="blogsContainer">
     <h1>Recent Blogs</h1>
