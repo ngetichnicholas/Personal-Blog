@@ -119,6 +119,7 @@ def delete_post(blog_id):
     return redirect(url_for('main.index'))
 
 @main.route("/blog/<int:id>/<int:comment_id>/delete")
+@login_required
 def delete_comment(id, comment_id):
     blog = Blog.query.filter_by(id = id).first()
     comment = Comment.query.filter_by(id = comment_id).first()
